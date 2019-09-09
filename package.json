@@ -1,13 +1,21 @@
 {
+<<<<<<< HEAD
   "name": "FEC",
   "version": "",
   "description": "",
   "author": "shawn-chambers",
+=======
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+>>>>>>> ed28197... (init)
   "license": "",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "nodemon server/index.js -w server",
     "build": "webpack -d --watch",
     "seed": "node ./database/seedScript.js",
@@ -33,5 +41,12 @@
     "jest": "^24.9.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
+=======
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
+>>>>>>> ed28197... (init)
   }
 }
