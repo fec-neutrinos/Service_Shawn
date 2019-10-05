@@ -7,6 +7,11 @@ const knex = require('knex')({
     database: 'dropApp'
   }
 });
+// const seed = require('/seeding');
+
+// const seedReviews = function() {
+//   seed();
+// }
 
 const getReviews = function(cb) {
   knex.select().table('reviews')
