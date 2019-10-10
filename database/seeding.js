@@ -17,7 +17,7 @@ const knex = require('knex')({
 
 const createFakeReview = () => ({
   user_name: faker.internet.userName(),
-  product_id: faker.random.number(12000),
+  product_id: faker.random.number({min:0, max: 5}),
   review_date: faker.date.past(),
   header: faker.lorem.sentence(3),
   review_text: faker.lorem.sentences(3, 3),

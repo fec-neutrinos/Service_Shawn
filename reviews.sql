@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS reviews (
   product_id INT NOT NULL,
   review_date DATE,
   header VARCHAR(50),
-  review_text VARCHAR(300),
+  review_text TEXT,
   rating INT,
   would_recommend BOOLEAN,
   PRIMARY KEY(review_id)

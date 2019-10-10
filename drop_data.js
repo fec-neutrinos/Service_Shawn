@@ -1,11 +1,11 @@
 var reviews = [
   {
-    reviewId: '',
-    userId: '',
+    userName: '',
+    productId: '',
     date: '',
     header: '',
-    rating: '', // out of 5 starts
     text: '',
+    rating: '', // out of 5 starts
     wouldRecommend: Boolean
   }
 ];
