@@ -2,6 +2,7 @@ import $ from 'jquery';
 import StarAverage from './StarAverage.jsx';
 import WouldRecommendAverage from './WouldRecommendAverage.jsx';
 import Reviews from './Reviews.jsx';
+import UserReview from './UserReview.jsx';
 
 class ReviewPage extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class ReviewPage extends React.Component {
       success: (data) => {
         var revs = [];
         data.forEach((entry) => {
-          if (entry.product_id === 4) {
+          if (entry.product_id === 5) {
             revs.push(entry);
           }
         })
@@ -51,7 +52,7 @@ class ReviewPage extends React.Component {
       }
     })
   }
-  
+
 
   render() {
     return (
@@ -59,6 +60,7 @@ class ReviewPage extends React.Component {
       <h1> hey hey ya'll </h1>
       <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
       <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
+      <UserReview/>
       <Reviews reviews={this.state.reviews}/>
       </>
     )

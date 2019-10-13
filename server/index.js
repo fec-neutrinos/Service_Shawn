@@ -16,4 +16,12 @@ app.get('/product/reviews', (req, res) => {
   })
 });
 
+app.post('/product/submit_review', (req, res) => {
+  console.log('post recieved');
+  db.addReview(req.body, () => {
+    console.log(err);
+    res.end();
+  });
+});
+
 app.listen(port, () => console.log(`listening on port ${port}`));

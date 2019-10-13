@@ -13,8 +13,19 @@ const knex = require('knex')({
 //   seed();
 // }
 
+const addReview = function(review, cb) {
+  console.log('in addReview', review);
+  knex('reviews').insert(review)
+    .then((review) => {
+      console.log(`inserted ${review} into reviews table`);
+    })
+    .catch((err) => {
+      cb(err);
+    });
+}
+
 const getReviews = function(cb) {
-  knex.select().table('reviews')
+  knex.select().table('reviews').orderBy('review_date', 'desc')
     .then((data) => {
       cb(data);
     })
@@ -24,5 +35,6 @@ const getReviews = function(cb) {
 }
 
 module.exports = {
-  getReviews
+  getReviews,
+  addReview
 }

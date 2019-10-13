@@ -10,7 +10,8 @@
   "scripts": {
     "start": "nodemon server/index.js -w server",
     "build": "webpack -d --watch",
-    "seed": "node ./database/seeding.js"
+    "seed": "node ./database/seeding.js",
+    "test": "jest"
   },
   "dependencies": {
     "babel": "^6.23.0",
