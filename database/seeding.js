@@ -27,7 +27,7 @@ const createFakeReview = () => ({
 
 var seed = function() {
   const fakeReviews = [];
-  const numOfFakeReviews = 15;
+  const numOfFakeReviews = 100;
   for (var i = 0; i < numOfFakeReviews; i ++) {
     fakeReviews.push(createFakeReview());
   }

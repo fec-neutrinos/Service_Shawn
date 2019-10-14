@@ -33,16 +33,15 @@ class ReviewPage extends React.Component {
   }
 
   componentDidMount() {
+    let url = `http://localhost:3030/${2}/reviews`
     $.ajax({
-      url: 'http://localhost:3030/product/reviews',
+      url: url,
       type: 'GET',
       dataType: 'json',
       success: (data) => {
         var revs = [];
         data.forEach((entry) => {
-          if (entry.product_id === 5) {
-            revs.push(entry);
-          }
+          revs.push(entry);
         })
         this.setState({
           reviews: revs,

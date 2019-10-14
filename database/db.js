@@ -14,7 +14,6 @@ const knex = require('knex')({
 // }
 
 const addReview = function(review, cb) {
-  console.log('in addReview', review);
   knex('reviews').insert(review)
     .then((review) => {
       console.log(`inserted ${review} into reviews table`);
@@ -24,8 +23,9 @@ const addReview = function(review, cb) {
     });
 }
 
-const getReviews = function(cb) {
-  knex.select().table('reviews').orderBy('review_date', 'desc')
+const getReviews = function(productId, cb) {
+  console.log('inside getReviews', productId['product_id']);
+  knex.select().table('reviews').where('product_id', productId['product_id'].toString()).orderBy('review_date', 'desc')
     .then((data) => {
       cb(data);
     })
