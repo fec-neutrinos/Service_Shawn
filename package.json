@@ -10,8 +10,8 @@
   "scripts": {
     "start": "nodemon server/index.js -w server",
     "build": "webpack -d --watch",
-    "seed": "node ./database/seeding.js",
-    "test": "jest"
+    "seed": "node ./database/seedScript.js",
+    "test": "jest --detectOpenHandles"
   },
   "dependencies": {
     "babel": "^6.23.0",
@@ -20,6 +20,7 @@
     "jquery": "^3.4.1",
     "knex": "^0.19.4",
     "mysql": "^2.17.1",
+    "node-fetch": "^2.6.0",
     "nodemon": "^1.19.3"
   },
   "devDependencies": {
@@ -28,6 +29,8 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "jes": "^0.6.1",
+    "jest": "^24.9.0",
     "webpack": "^4.41.0",
     "webpack-cli": "^3.3.9"
   }

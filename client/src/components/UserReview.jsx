@@ -25,10 +25,11 @@ class UserReview extends React.Component {
   }
 
   handleReview() {
-    // $.post('http://localhost:3030/product/submit_review', this.state); real
-    $.post('http://localhost:3030/product/submit_review', {
+    let productId = (window.location.pathname).substring(1);
+
+    $.post(`http://localhost:3030/${productId}/submit_review`, {
       user_name: 'ShawnChambers',
-      product_id: '4',
+      product_id: productId,
       review_date: '2019-10-30',
       header: 'This rocks yo',
       review_text: 'No really, it\'s the bee\'s knees',
@@ -37,7 +38,7 @@ class UserReview extends React.Component {
     }); // practice
     this.setState({
       hasBeenReviewed: true
-    })
+    });
   }
 
   render() {

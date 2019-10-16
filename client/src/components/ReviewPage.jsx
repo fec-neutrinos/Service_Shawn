@@ -10,7 +10,8 @@ class ReviewPage extends React.Component {
     this.state = {
       reviews: [],
       averageReview: '',
-      averageWouldRecommend: ''
+      averageWouldRecommend: '',
+      productId: ''
     }
     this.findAverageReview = this.findAverageReview.bind(this);
     this.findAverageRecommend = this.findAverageRecommend.bind(this);
@@ -20,7 +21,7 @@ class ReviewPage extends React.Component {
     var total = 0;
     reviews.forEach((review) => {
       total += (review.would_recommend);
-    })
+    });
     return (total/reviews.length * 100).toFixed(0);
   }
 
@@ -28,35 +29,34 @@ class ReviewPage extends React.Component {
     var total = 0;
     reviews.forEach((review) => {
       total += review.rating;
-    })
+    });
     return (total/reviews.length).toFixed(1);
   }
 
   componentDidMount() {
-    let url = `http://localhost:3030/${2}/reviews`
+    let productId = (window.location.pathname).substring(1);
+
+    let url = `http://localhost:3030/${productId}/reviews`;
     $.ajax({
       url: url,
       type: 'GET',
       dataType: 'json',
       success: (data) => {
-        var revs = [];
-        data.forEach((entry) => {
-          revs.push(entry);
-        })
+        console.log('data from get', data)
         this.setState({
-          reviews: revs,
-          averageReview: this.findAverageReview(revs),
-          averageWouldRecommend: this.findAverageRecommend(revs)
-        })
+          reviews: data,
+          averageReview: this.findAverageReview(data),
+          averageWouldRecommend: this.findAverageRecommend(data)
+        });
       }
-    })
+    });
   }
 
 
   render() {
     return (
       <>
-      <h1> hey hey ya'll </h1>
+      <h1> hey hey ya'll want some reviews yo? </h1>
       <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
       <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
       <UserReview/>

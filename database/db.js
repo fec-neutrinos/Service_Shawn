@@ -24,7 +24,7 @@ const addReview = function(review, cb) {
 }
 
 const getReviews = function(productId, cb) {
-  console.log('inside getReviews', productId['product_id']);
+  // console.log('inside getReviews', productId['product_id']);
   knex.select().table('reviews').where('product_id', productId['product_id'].toString()).orderBy('review_date', 'desc')
     .then((data) => {
       cb(data);

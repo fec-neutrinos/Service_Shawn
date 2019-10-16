@@ -42,8 +42,7 @@ var seed = function() {
     });
 }
 
-seed();
-
-// module.exports = {
-//   seed
-// }
+module.exports = {
+  seed,
+  createFakeReview
+}
