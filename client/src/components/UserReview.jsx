@@ -35,7 +35,8 @@ class UserReview extends React.Component {
       review_text: 'No really, it\'s the bee\'s knees',
       rating: '5',
       would_recommend: 1
-    }); // practice
+    });
+    // mock data for POST request
     this.setState({
       hasBeenReviewed: true
     });
