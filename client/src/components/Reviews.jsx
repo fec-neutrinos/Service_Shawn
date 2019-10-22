@@ -1,9 +1,10 @@
-import Review from './Review.jsx'
+/* eslint-disable func-style */
+import Review from './Review.jsx';
 
 function Reviews(props) {
   return (
     <Review reviews={props.reviews} />
-  )
+  );
 }
 
 

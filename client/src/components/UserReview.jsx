@@ -1,8 +1,9 @@
+/* eslint-disable camelcase */
 import $ from 'jquery';
 
 class UserReview extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       user_name: '',
       product_id: '',
@@ -12,7 +13,7 @@ class UserReview extends React.Component {
       rating: '',
       would_recommend: '',
       hasBeenReviewed: false
-    }
+    };
     this.handleChange = this.handleChange.bind(this);
     this.handleReview = this.handleReview.bind(this);
   }

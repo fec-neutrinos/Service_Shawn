@@ -17,5 +17,12 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: __dirname + '/public'
+  },
+  externals: {
+    "styled-components": {
+      commonjs: "styled-components",
+      commonjs2: "styled-components",
+      amd: "styled-components",
+    },
   }
 };

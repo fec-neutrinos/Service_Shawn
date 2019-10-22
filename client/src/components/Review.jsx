@@ -1,16 +1,20 @@
+/* eslint-disable func-style */
+import React from 'react';
+import styled from 'styled-components';
+
 function Review(props) {
-  return(
+  return (
     <>
       {props.reviews.map(review => (
         <div>
           <h4>{review.user_name}</h4>
-          <div>{'*'.repeat(review.rating)}</div>
+          <div>{'★'.repeat(review.rating).concat('☆'.repeat(5 - review.rating))}</div>
           <h3>{review.header}</h3>
           <div>{review.review_text}</div>
         </div>
       ))}
     </>
-  )
+  );
 }
 
 export default Review;

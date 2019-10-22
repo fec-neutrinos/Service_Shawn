@@ -4,7 +4,9 @@ const port = 3030;
 const bodyParser = require('body-parser');
 const db = require('../database/db');
 const path = require('path');
+const morgan = require('morgan');
 
+app.use(morgan('dev'));
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
