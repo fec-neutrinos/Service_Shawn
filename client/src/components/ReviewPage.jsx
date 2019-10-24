@@ -6,9 +6,11 @@ import UserReview from './UserReview.jsx';
 import React from 'react';
 import styled from 'styled-components';
 
-// var Header = styled.div`
-//   background-color: cornflowerblue
-// `;
+var Grid = styled.div`
+  .container {
+    display: grid,
+  }
+`;
 
 class ReviewPage extends React.Component {
   constructor(props) {
@@ -50,7 +52,7 @@ class ReviewPage extends React.Component {
       type: 'GET',
       dataType: 'json',
       success: (data) => {
-        console.log('data from get', data)
+        console.log('data from get', data);
         this.setState({
           reviews: data,
           averageReview: this.findAverageReview(data),
@@ -64,13 +66,14 @@ class ReviewPage extends React.Component {
   render() {
     return (
       <>
-      {/* <Header> */}
-        <h1> hey hey ya'll want some reviews yo? </h1>
+      <Grid>
+        <h1> HERE'S WHAT OUR COMMUNITY HAS TO SAY </h1>
+        <h2> All of our reviews are from verified customers </h2>
         <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
         <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
         <UserReview/>
         <Reviews reviews={this.state.reviews}/>
-      {/* </Header> */}
+      </Grid>
       </>
     );
   }
