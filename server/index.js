@@ -18,7 +18,7 @@ app.get('/:product_id', (req, res) => {
 app.get('/:product_id/reviews', (req, res) => {
   db.getReviews(req.params, (data) => {
     res.send(data);
-  })
+  });
 });
 
 app.post('/:product_id/submit_review', (req, res) => {

@@ -12,6 +12,67 @@ var Grid = styled.div`
   }
 `;
 
+var DynamicUnderline = styled.div`
+  div {
+    color: black; display:inline-block;
+    margin: 0;
+    text-transform: uppercase;
+    font-family: Stratos Web;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+  }
+  div:after {
+    display:block;
+    content: '';
+    border-bottom: solid 4px #fdcf41;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+  }
+  div.fromLeft:after {
+    transform-origin: 0% 50%;
+  }
+  div.fromLeft:hover:after {
+    transform: scaleX(1);
+    transform-origin:   0% 50%;
+  }
+  div.selected {
+    display:block;
+    content: '';
+    border-bottom: solid 5px #fdcf41;
+  }
+  .topCount {
+    font-family: gordita;
+    vertical-align: super;
+    margin-left: 5px;
+    font-size: 8px;
+    line-height: 16px;
+  }
+`;
+
+var Stylings = styled.div`
+  font-family: Helvetica,Arial,Verdana,sans-serif;
+  hr {
+    color: #9f9e9e;
+  }
+  .title{
+    font-family: Stratos Web;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 34px;
+  }
+  .subtitle{
+    font-family: gordita;
+    text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+
+`;
+
 class ReviewPage extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +84,7 @@ class ReviewPage extends React.Component {
     };
     this.findAverageReview = this.findAverageReview.bind(this);
     this.findAverageRecommend = this.findAverageRecommend.bind(this);
+    this.selectReviews = this.selectReviews.bind(this);
   }
 
   findAverageRecommend(reviews) {
@@ -31,6 +93,13 @@ class ReviewPage extends React.Component {
       total += (review.would_recommend);
     });
     return (total / reviews.length * 100).toFixed(0);
+  }
+
+  selectReviews() {
+    $('.fromLeft').on('click', function() {
+      $('fromLeft').removeClass('fromLeft');
+      $(this).addClass('selected');
+    });
   }
 
   findAverageReview(reviews) {
@@ -67,12 +136,19 @@ class ReviewPage extends React.Component {
     return (
       <>
       <Grid>
-        <h1> HERE'S WHAT OUR COMMUNITY HAS TO SAY </h1>
-        <h2> All of our reviews are from verified customers </h2>
-        <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
-        <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
-        <UserReview/>
-        <Reviews reviews={this.state.reviews}/>
+        <Stylings>
+          <DynamicUnderline>
+            <div>
+              <div className="fromLeft" onClick={this.selectReviews}>REVIEWS</div>   <span className="topCount">{this.state.reviews.length}</span>
+            </div>
+          </DynamicUnderline>
+          <div className="title"> HERE'S WHAT OUR COMMUNITY HAS TO SAY </div>
+          <div className="subtitle"> All of our reviews are from verified customers. </div>
+          <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
+          <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
+          <UserReview/>
+          <Reviews reviews={this.state.reviews}/>
+        </Stylings>
       </Grid>
       </>
     );
