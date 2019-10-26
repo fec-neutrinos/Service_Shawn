@@ -1,5 +1,7 @@
 /* eslint-disable func-style */
 import styled from 'styled-components';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 
 function StarAverage(props) {
@@ -62,6 +64,24 @@ function StarAverage(props) {
       </Stars>
     </div>
   );
+
+  // return (
+  //   <div>
+  //     <Average>
+  //       <div className="average">{props.reviewsAverage}</div>
+  //     </Average>
+  //     <Stars>
+  //       <JudgyStars>
+  //         <div><StarIcon></StarIcon><StarIcon></StarIcon><StarIcon></StarIcon><StarIcon></StarIcon><StarIcon></StarIcon></div>
+  //         {/* <div><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div> */}
+  //       </JudgyStars>
+  //       <BlankStars>
+  //         <div><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon></div>
+  //         {/* <div><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span className="total">{(props.totalReviews > 0) ? props.totalReviews : ''}</span></div> */}
+  //       </BlankStars>
+  //     </Stars>
+  //   </div>
+  // );
 }
 
 export default StarAverage;

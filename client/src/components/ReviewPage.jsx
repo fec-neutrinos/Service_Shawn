@@ -9,6 +9,10 @@ import styled from 'styled-components';
 var Grid = styled.div`
   .container {
     display: grid,
+    grid-template-rows: [row1-start] 15px [row1-end] auto;
+  }
+  .underline {
+    grid-row-start: row1-start;
   }
 `;
 
@@ -138,12 +142,14 @@ class ReviewPage extends React.Component {
       <Grid>
         <Stylings>
           <DynamicUnderline>
-            <div>
+            <div className="underline">
               <div className="fromLeft" onClick={this.selectReviews}>REVIEWS</div>   <span className="topCount">{this.state.reviews.length}</span>
             </div>
           </DynamicUnderline>
-          <div className="title"> HERE'S WHAT OUR COMMUNITY HAS TO SAY </div>
-          <div className="subtitle"> All of our reviews are from verified customers. </div>
+          <div>
+            <div className="title"> HERE'S WHAT OUR COMMUNITY HAS TO SAY </div>
+            <div className="subtitle"> All of our reviews are from verified customers. </div>
+          </div>
           <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
           <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
           <UserReview/>

@@ -1,5 +1,60 @@
 /* eslint-disable camelcase */
 import $ from 'jquery';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import styled from 'styled-components';
+
+
+const Post = styled.div`
+  .button {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  }
+`;
+
+const Rating = styled.div`
+  .rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  .rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+  }
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before {
+    content: '★';
+    position: absolute;
+  }
+`;
+
+const Text = styled.div`
+  .header {
+    height: 18px;
+    width: 90%
+    font-size: 12pt;
+    font-family: gordita;
+    padding: 10px 12px;
+    resize: none;
+    margin: 10px 10px 20px 40px;
+  }
+  .text {
+    height: 70px;
+    vertical-align: top;
+    width: 90%
+    font-size: 12pt;
+    font-family: gordita;
+    padding: 10px 12px;
+    resize: none;
+    margin: 0px 10px 20px 40px;
+  }
+`;
 
 class UserReview extends React.Component {
   constructor(props) {
@@ -49,15 +104,25 @@ class UserReview extends React.Component {
     }
     return (
       <>
+      <Rating>
+        <div className="rating">
+          <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+        </div>
+      </Rating>
+      <Text>
         <div>
-          <input name='header' type='text' placeholder='What was your overall impression? (Optional)' onChange={this.handleChange}/>
+          <textarea className="header" name='header' type='text' placeholder='What was your overall impression? (Optional)' onChange={this.handleChange}/>
         </div>
         <div>
-          <input name='review_text' type='text' placeholder='Share your experience with the product. What did you like or dislike? (Optional)' onChange={this.handleChange}/>
+          <textarea className="text" name='review_text' type='text' placeholder='Share your experience with the product. What did you like or dislike? (Optional)' onChange={this.handleChange}/>
         </div>
-        <button onClick={this.handleReview}>POST REVIEW</button>
+      </Text>
+        <div>Would you recommend this product to a friend? (Optional)</div>
+        <Post>
+          <Button className="button" onClick={this.handleReview}>POST REVIEW</Button>
+        </Post>
       </>
-    )
+    );
   }
 
 }

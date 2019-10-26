@@ -1,6 +1,7 @@
 /* eslint-disable func-style */
 import styled from 'styled-components';
 import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
 
 var Percentage = styled.div`
   .percentage {
@@ -33,13 +34,14 @@ var Percentage = styled.div`
 
 `;
 
+// {(props.totalReviews > 0) ? props.totalReviews : ''}
 
 function WouldRecommendAverage(props) {
   return (
     <>
     <Percentage>
       <div className="percentage">
-        <CheckIcon className="check"></CheckIcon><span>{props.averageRecommend}</span><span className="recommend">% would recommend to a friend</span>
+        <span>{(props.averageRecommend > 50) ? <CheckIcon className="check"></CheckIcon> : <ClearIcon className="check"></ClearIcon>}</span><span>{props.averageRecommend}</span><span className="recommend">% would recommend to a friend</span>
       </div>
     </Percentage>
     </>
