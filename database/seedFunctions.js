@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const faker = require('faker');
 const knex = require('knex')({
   client: 'mysql',
@@ -20,10 +21,10 @@ const createFakeReview = () => ({
   product_id: faker.random.number({min:0, max: 5}),
   review_date: faker.date.past(),
   header: faker.lorem.sentence(3),
-  review_text: faker.lorem.sentences(3, 3),
+  review_text: faker.lorem.paragraph(3, 3),
   rating: faker.random.number({min:0, max: 5}),
   would_recommend: faker.random.boolean()
-})
+});
 
 var seed = function() {
   const fakeReviews = [];
