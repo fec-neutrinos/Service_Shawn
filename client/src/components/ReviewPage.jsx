@@ -11,20 +11,17 @@ var Grid = styled.div`
     display: grid,
     grid-template-rows: [row1-start] 15px [row1-end] auto;
   }
-  .underline {
-    grid-row-start: row1-start;
-  }
 `;
 
 var DynamicUnderline = styled.div`
   div {
     color: black; display:inline-block;
-    margin: 0;
     text-transform: uppercase;
     font-family: Stratos Web;
     font-weight: 500;
     font-size: 16px;
     line-height: 21px;
+    margin: 4px 0px 4px 12px;
   }
   div:after {
     display:block;
@@ -45,6 +42,11 @@ var DynamicUnderline = styled.div`
     content: '';
     border-bottom: solid 5px #fdcf41;
   }
+  div.focus {
+    display:block;
+    content: '';
+    border-bottom: solid 5px #fdcf41;
+  }
   .topCount {
     font-family: gordita;
     vertical-align: super;
@@ -59,21 +61,24 @@ var Stylings = styled.div`
   hr {
     color: #9f9e9e;
   }
-  .title{
+  .title {
     font-family: Stratos Web;
     text-align: center;
     font-size: 22px;
     font-weight: bold;
     line-height: 34px;
   }
-  .subtitle{
+  .subtitle {
     font-family: gordita;
     text-align: center;
     font-weight: 400;
     font-size: 12px;
     line-height: 20px;
+    margin: 5px 0px 0px 0px;
   }
-
+  .average {
+    margin: 20px 0px 5px 0px;
+  }
 
 `;
 
@@ -84,11 +89,10 @@ class ReviewPage extends React.Component {
       reviews: [],
       averageReview: '',
       averageWouldRecommend: '',
-      productId: ''
+      productId: '',
     };
     this.findAverageReview = this.findAverageReview.bind(this);
     this.findAverageRecommend = this.findAverageRecommend.bind(this);
-    this.selectReviews = this.selectReviews.bind(this);
   }
 
   findAverageRecommend(reviews) {
@@ -97,13 +101,6 @@ class ReviewPage extends React.Component {
       total += (review.would_recommend);
     });
     return (total / reviews.length * 100).toFixed(0);
-  }
-
-  selectReviews() {
-    $('.fromLeft').on('click', function() {
-      $('fromLeft').removeClass('fromLeft');
-      $(this).addClass('selected');
-    });
   }
 
   findAverageReview(reviews) {
@@ -115,6 +112,10 @@ class ReviewPage extends React.Component {
   }
 
   componentDidMount() {
+    this.getReviewData();
+  }
+
+  getReviewData() {
     let productId = (window.location.pathname).substring(1);
 
     // let productId = 1;
@@ -135,24 +136,24 @@ class ReviewPage extends React.Component {
     });
   }
 
-
   render() {
+
     return (
       <>
       <Grid>
         <Stylings>
           <DynamicUnderline>
-            <div className="underline">
-              <div className="fromLeft" onClick={this.selectReviews}>REVIEWS</div>   <span className="topCount">{this.state.reviews.length}</span>
+            <div>
+              <div className="fromLeft">REVIEWS</div>   <span className="topCount">{this.state.reviews.length !== 0 ? this.state.reviews.length : ''}</span>
             </div>
           </DynamicUnderline>
           <div>
             <div className="title"> HERE'S WHAT OUR COMMUNITY HAS TO SAY </div>
             <div className="subtitle"> All of our reviews are from verified customers. </div>
           </div>
-          <StarAverage reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
+          <StarAverage className="average" reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
           <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
-          <UserReview/>
+          <UserReview getReviews={this.getReviewData}/>
           <Reviews reviews={this.state.reviews}/>
         </Stylings>
       </Grid>
