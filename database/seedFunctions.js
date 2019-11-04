@@ -41,9 +41,9 @@ var seed = function() {
     .catch((err) => {
       console.error(err);
     });
-}
+};
 
 module.exports = {
   seed,
   createFakeReview
-}
+};

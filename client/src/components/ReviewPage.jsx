@@ -127,6 +127,7 @@ class ReviewPage extends React.Component {
       dataType: 'json',
       success: (data) => {
         console.log('data from get', data);
+        console.log('this on get', this);
         this.setState({
           reviews: data,
           averageReview: this.findAverageReview(data),
@@ -153,7 +154,7 @@ class ReviewPage extends React.Component {
           </div>
           <StarAverage className="average" reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
           <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
-          <UserReview getReviews={this.getReviewData}/>
+          <UserReview getReviews={this.getReviewData.bind(this)}/>
           <Reviews reviews={this.state.reviews}/>
         </Stylings>
       </Grid>
