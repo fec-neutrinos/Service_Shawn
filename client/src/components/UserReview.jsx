@@ -41,10 +41,12 @@ const Post = styled.div`
     width: 120px;
     min-height: 45px;
     margin-top: 20px;
+    margin-right: 18px;
     padding: 8px;
     background-color: #f0f0f0;
     border-color: #f0f0f0;
     box-sizing: border-box;
+    float: right;
   }
   .icon {
     font-size: 22px;
@@ -65,10 +67,13 @@ const Post = styled.div`
     width: 120px;
     min-height: 45px;
     margin-top: 20px;
+    margin-right: 18px;
+    padding: 8px;
     padding: 8px;
     background-color: #f0f0f0;
     border-color: #f0f0f0;
     box-sizing: border-box;
+    float: right;
   }
 `;
 
@@ -114,7 +119,7 @@ const Rating = styled.div`
 
 const Text = styled.div`
   .header {
-    height: 18px;
+    height: 23px;
     width: 90%
     font-size: 12pt;
     font-family: gordita;

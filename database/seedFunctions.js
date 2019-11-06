@@ -18,13 +18,15 @@ const knex = require('knex')({
 
 const createFakeReview = () => ({
   user_name: faker.internet.userName(),
-  product_id: faker.random.number({min:0, max: 5}),
+  product_id: faker.random.number({min: 0, max: 5}),
   review_date: faker.date.past(),
   header: faker.lorem.sentence(3),
   review_text: faker.lorem.paragraph(3, 3),
-  rating: faker.random.number({min:0, max: 5}),
+  rating: faker.random.number({min: 0, max: 5}),
   would_recommend: faker.random.boolean()
 });
+
+
 
 var seed = function() {
   const fakeReviews = [];

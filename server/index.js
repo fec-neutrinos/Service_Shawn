@@ -22,10 +22,8 @@ app.get('/:product_id/reviews', (req, res) => {
 });
 
 app.post('/:product_id/submit_review', (req, res) => {
-  console.log('post recieved');
   db.addReview(req.body, () => {
-    // console.log(err);
-    res.end();
+    console.log(data);
   });
   res.end();
 });
