@@ -10,7 +10,7 @@
   "scripts": {
     "start": "nodemon server/index.js -w server",
     "build": "webpack -d --watch",
-    "seed": "node ./database/seedScript.js",
+    "seed": "node ./database/seed/seedScript.js",
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {

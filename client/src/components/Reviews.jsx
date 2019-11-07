@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 var Line = styled.div`
   .line {
-    width: 97%;
+    width: 98%;
     height: 20px;
     border-top: 1px solid #9f9e9e;
     margin-top: 100px;
@@ -12,13 +12,20 @@ var Line = styled.div`
   }
 `;
 
+var Reviewed = styled.div`
+  margin-left: 3%;
+  margin-right: 3%;
+`;
+
 function Reviews(props) {
   return (
     <>
-      <Line>
-        <div className="line"></div>
-      </Line>
-      <Review reviews={props.reviews} />
+      <Reviewed>
+        <Line>
+          <div className="line"></div>
+        </Line>
+        <Review reviews={props.reviews} />
+      </Reviewed>
     </>
   );
 }

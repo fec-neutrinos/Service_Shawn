@@ -41,7 +41,7 @@ const Post = styled.div`
     width: 120px;
     min-height: 45px;
     margin-top: 20px;
-    margin-right: 18px;
+    margin-right: 4%;
     padding: 8px;
     background-color: #f0f0f0;
     border-color: #f0f0f0;
@@ -67,8 +67,7 @@ const Post = styled.div`
     width: 120px;
     min-height: 45px;
     margin-top: 20px;
-    margin-right: 18px;
-    padding: 8px;
+    margin-right: 4%;
     padding: 8px;
     background-color: #f0f0f0;
     border-color: #f0f0f0;

@@ -1,17 +1,12 @@
 const knex = require('knex')({
   client: 'mysql',
   connection: {
-    host: '127.0.0.1',
+    host: 'localhost',
     user: 'root',
     password: 'password',
     database: 'dropApp'
   }
 });
-// const seed = require('/seeding');
-
-// const seedReviews = function() {
-//   seed();
-// }
 
 const addReview = function(review, cb) {
   knex('reviews').insert(review)

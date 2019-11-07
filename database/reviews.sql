@@ -2,13 +2,9 @@ DROP DATABASE IF EXISTS dropApp;
 
 CREATE DATABASE dropApp;
 
-USE dropApp;
+CREATE LOGIN review WITH PASSWORD = '1234'
 
--- CREATE TABLE IF NOT EXISTS users (
---   user_id INT AUTO_INCREMENT,
---   user_name VARCHAR(15),
---   PRIMARY KEY(user_id)
--- );
+USE dropApp;
 
 CREATE TABLE IF NOT EXISTS reviews (
   review_id INT AUTO_INCREMENT,
@@ -20,5 +16,4 @@ CREATE TABLE IF NOT EXISTS reviews (
   rating INT,
   would_recommend BOOLEAN,
   PRIMARY KEY(review_id)
-  -- FOREIGN KEY(user_id) REFERENCES users(user_id)
 );

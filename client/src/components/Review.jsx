@@ -110,7 +110,6 @@ var ReviewStyle = styled.div`
     size: 8px
   }
   .line {
-    width: 98.5%;
     height: 20px;
     border-top: 1px solid #9f9e9e;
     margin-top: 20px;
