@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import $ from 'jquery';
 import styled from 'styled-components';
+import moment from 'moment';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
@@ -40,10 +41,12 @@ const Post = styled.div`
     width: 120px;
     min-height: 45px;
     margin-top: 20px;
+    margin-right: 4%;
     padding: 8px;
     background-color: #f0f0f0;
     border-color: #f0f0f0;
     box-sizing: border-box;
+    float: right;
   }
   .icon {
     font-size: 22px;
@@ -54,6 +57,22 @@ const Post = styled.div`
   }
   .postButton:focus {
     background-color: #f0f0f0;
+  }
+  .ready {
+    font-family: Stratos Web;
+    font-weight: 500;
+    font-size: 15px;
+    position: relative;
+    display: block;
+    width: 120px;
+    min-height: 45px;
+    margin-top: 20px;
+    margin-right: 4%;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border-color: #f0f0f0;
+    box-sizing: border-box;
+    float: right;
   }
 `;
 
@@ -99,7 +118,7 @@ const Rating = styled.div`
 
 const Text = styled.div`
   .header {
-    height: 18px;
+    height: 23px;
     width: 90%
     font-size: 12pt;
     font-family: gordita;
@@ -170,27 +189,36 @@ class UserReview extends React.Component {
   handleReview() {
     let productId = (window.location.pathname).substring(1);
 
-    $.post(`http://localhost:3030/${productId}/submit_review`, {
-      user_name: 'ShawnChambers',
-      product_id: productId,
-      review_date: '2019-10-30',
-      header: 'This rocks yo',
-      review_text: 'No really, it\'s the bee\'s knees',
-      rating: '5',
-      would_recommend: 1
+    $.ajax({
+      url: `http://localhost:3030/${productId}/submit_review`,
+      type: 'POST',
+      data: {
+        user_name: 'ShawnChambers',
+        product_id: productId,
+        review_date: moment().format().substring(0, 10),
+        header: this.state.header,
+        review_text: this.state.review_text,
+        rating: this.state.rating,
+        would_recommend: 1
+      },
+      success: () => {
+        console.log('success');
+        this.props.getReviews();
+        this.setState({
+          hasBeenReviewed: true
+        });
+      }
     });
-    // mock data for POST request
-    this.setState({
-      hasBeenReviewed: true
-    });
-    // this.props.getReviews();
-    // FIX ME
+
 
   }
 
   render() {
     if (this.state.hasBeenReviewed) {
-      return null;
+      return (
+        // <div>Thanks for your review!</div>
+        null
+      );
     }
     // use ternary statements to evaluate component state and render stars
     return (
@@ -230,7 +258,7 @@ class UserReview extends React.Component {
                 YES
                 </Grid>
               </Grid></button>
-            <button className={this.state.would_recommend === 0 ? 'clicked' : ''} onClick={this.wouldNotRecommend} style={{'margin-left': '12px'}}>
+            <button className={this.state.would_recommend === 0 ? 'clicked' : ''} onClick={this.wouldNotRecommend} style={{marginLeft: '12px'}}>
               <Grid container direction="row" alignItems="center" justify="center">
                 <Grid item>
                   <ClearIcon className="icon"></ClearIcon>
@@ -241,7 +269,7 @@ class UserReview extends React.Component {
               </Grid></button>
           </span>
         </div>
-        <button className={this.state.rating === '' ? 'postButton' : 'ready'} onClick={this.state.rating !== '' ? this.handleReview : ''}>POST REVIEW</button>
+        <button className={this.state.rating === '' ? 'postButton' : 'ready'} onClick={this.state.rating !== '' ? this.handleReview : null}>POST REVIEW</button>
       </Post>
       </>
     );

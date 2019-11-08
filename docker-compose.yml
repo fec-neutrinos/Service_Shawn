@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+
+  db:
+    container_name: dropApp
+    image: mysql:5.7
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
+
+  app:
+    container_name: service
+    build: .
+    ports:
+      - "3030:3030"
+    links:
+      - db
+
+  seed:
+    container_name: seed
+    build: ./database/seed
+    links:
+      - db
