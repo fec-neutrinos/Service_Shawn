@@ -202,7 +202,6 @@ class UserReview extends React.Component {
         would_recommend: 1
       },
       success: () => {
-        console.log('success');
         this.props.getReviews();
         this.setState({
           hasBeenReviewed: true

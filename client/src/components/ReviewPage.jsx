@@ -126,8 +126,6 @@ class ReviewPage extends React.Component {
       type: 'GET',
       dataType: 'json',
       success: (data) => {
-        console.log('data from get', data);
-        console.log('this on get', this);
         this.setState({
           reviews: data,
           averageReview: this.findAverageReview(data),

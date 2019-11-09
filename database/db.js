@@ -1,7 +1,14 @@
 const knex = require('knex')({
   client: 'mysql',
+  // connection: {
+  //   host: 'db',
+  //   port: '3306',
+  //   user: 'root',
+  //   // password: 'password',
+  //   database: 'dropApp'
+  // }
   connection: {
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: 'password',
     database: 'dropApp'
@@ -19,7 +26,6 @@ const addReview = function(review, cb) {
 };
 
 const getReviews = function(productId, cb) {
-  // console.log('inside getReviews', productId['product_id']);
   knex.select().table('reviews').where('product_id', productId['product_id'].toString()).orderBy('review_id', 'desc')
     .then((data) => {
       cb(data);

@@ -10,7 +10,10 @@ import ReplyIcon from '@material-ui/icons/Reply';
 import ShareIcon from '@material-ui/icons/Share';
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import moment from 'moment';
 
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
@@ -60,6 +63,15 @@ var ReviewStyle = styled.div`
     font-weight: 500;
     margin-top: 16px;
   }
+  .date {
+    font-family: gordita;
+    font-size: 10px;
+    color: #dcdcdc;
+    float: right;
+    padding-right: 5px;
+    position: relative;
+    top: -17px;
+  }
   .text {
     font-family: gordita;
     font-weight: 400;
@@ -100,13 +112,11 @@ var ReviewStyle = styled.div`
     font-size: 12px;
     line-height: 20px;
     color: #dcdcdc;
-    margin-right: 15px
   }
   .optionMenu > span:hover {
     color: #fdcf41;
   }
   .icon {
-    margin-top: 15px;
     size: 8px
   }
   .line {
@@ -114,30 +124,58 @@ var ReviewStyle = styled.div`
     border-top: 1px solid #9f9e9e;
     margin-top: 20px;
   }
+  .iconContainer {
+    float: right
+    position: relative;
+    top: 18px
+  }
+  .iconContainer > span:hover {
+    color: #fdcf41;
+  }
   `;
 
+const useStyles = makeStyles({
+  move: {
+    position: 'relative',
+    top: '15px',
+    padding: '10px 2px 10px 12px',
+  },
+  root: {
+    padding: '8px 8px 10px 4px',
+  }
+});
+
 function Review(props) {
+  const classes = useStyles();
   return (
     <>
-      {props.reviews.map(review => (
-        <Layout>
-          <ReviewStyle>
-            <div className="grid">
-              <div>
-
-                <span className="circle" style={{backgroundColor: getRandomColor()}}>{review.user_name.substring(0, 1)}</span>
-
-                <span className="user">{review.user_name}</span>
+      {props.reviews.map((review, i) => (
+        <div key={i}>
+          <Layout>
+            <ReviewStyle>
+              <div className="grid">
+                <div>
+                  <span className="circle" style={{backgroundColor: getRandomColor()}}>{review.user_name.substring(0, 1)}</span><span className="user">{review.user_name}</span><span className="date">{moment(review.review_date).format('ll')}</span>
+                </div>
+                <div className="stars">{'★ '.repeat(review.rating).concat('☆ '.repeat(5 - review.rating))}</div>
+                <div className="header">{review.header}</div>
+                <div className="text">{review.review_text}</div>
+                <div><span>{(review.would_recommend > 0) ? <CheckIcon className="check"></CheckIcon> : <ClearIcon className="check"></ClearIcon>}</span><span className="recommend">Would {review.would_recommend > 0 ? '' : 'not '}recommend to a friend.</span></div>
+                <div className="optionMenu">
+                  <span>Helpful?</span>
+                  <span className="icon"><ThumbUpIcon className={classes.move}></ThumbUpIcon></span>
+                  <span><ReplyIcon className={classes.move}></ReplyIcon><Typography variant="caption">REPLY</Typography></span>
+                  <div className="iconContainer">
+                    <span className="icon"><BookmarkBorderIcon className={classes.root}></BookmarkBorderIcon></span>
+                    <span className="icon"><ShareIcon className={classes.root}></ShareIcon></span>
+                    <span className="icon"><MoreVertIcon className={classes.root}></MoreVertIcon></span>
+                  </div>
+                </div>
               </div>
-              <div className="stars">{'★ '.repeat(review.rating).concat('☆ '.repeat(5 - review.rating))}</div>
-              <div className="header">{review.header}</div>
-              <div className="text">{review.review_text}</div>
-              <div><span>{(review.would_recommend > 0) ? <CheckIcon className="check"></CheckIcon> : <ClearIcon className="check"></ClearIcon>}</span><span className="recommend">Would {review.would_recommend > 0 ? '' : 'not '}recommend to a friend.</span></div>
-              <div className="optionMenu"><span>Helpful?</span><span className="icon"><ThumbUpIcon></ThumbUpIcon></span><span><ReplyIcon className="icon"></ReplyIcon>REPLY</span><span className="icon"><BookmarkBorderIcon></BookmarkBorderIcon></span><span className="icon"><ShareIcon></ShareIcon></span><span className="icon"><MoreVertIcon></MoreVertIcon></span></div>
-            </div>
-            <div className="line"></div>
-          </ReviewStyle>
-        </Layout>
+              <div className="line"></div>
+            </ReviewStyle>
+          </Layout>
+        </div>
       ))}
     </>
   );

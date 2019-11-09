@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 const fetch = require('node-fetch');
-const seed = require('../database/seedFunctions.js');
+const seed = require('../database/seed/seedFunctions.js');
 
 
 // test 100 seeded into database
@@ -28,7 +29,7 @@ test('should return reviews for products with product ID matching url endpoint',
     .then((reviews) => {
       reviews.forEach((review) => {
         expect(review.product_id).toBe(test_id);
-      })
+      });
     })
     .then(() => {
       done();
