@@ -141,7 +141,7 @@ const useStyles = makeStyles({
     padding: '10px 2px 10px 12px',
   },
   root: {
-    padding: '8px 8px 10px 4px',
+    padding: '8px 0px 10px 12px;',
   }
 });
 

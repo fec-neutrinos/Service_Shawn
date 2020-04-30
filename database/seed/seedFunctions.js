@@ -6,7 +6,7 @@ const knex = require('knex')({
   //   host: 'db',
   //   port: '3306',
   //   user: 'root',
-  //   // password: 'password',
+  //   password: 'password',
   //   database: 'dropApp'
   // }
   connection: {
