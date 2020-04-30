@@ -12,7 +12,7 @@ const knex = require('knex')({
   connection: {
     host: 'localhost',
     user: 'root',
-    password: 'password',
+    // password: 'password',
     database: 'dropApp'
   }
 });

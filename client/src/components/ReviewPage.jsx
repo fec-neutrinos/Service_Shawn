@@ -5,6 +5,7 @@ import Reviews from './Reviews.jsx';
 import UserReview from './UserReview.jsx';
 import React from 'react';
 import styled from 'styled-components';
+import debounce from 'lodash.debounce';
 
 var Grid = styled.div`
   .container {
@@ -90,9 +91,19 @@ class ReviewPage extends React.Component {
       averageReview: '',
       averageWouldRecommend: '',
       productId: '',
+      displayedReviews: [],
+      reviewsLeft: null
     };
+
+    window.onscroll = debounce(() => {
+      if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+        this.loadMoreReviews();
+      }
+    }, 100);
+
     this.findAverageReview = this.findAverageReview.bind(this);
     this.findAverageRecommend = this.findAverageRecommend.bind(this);
+    this.loadMoreReviews = this.loadMoreReviews.bind(this);
   }
 
   findAverageRecommend(reviews) {
@@ -109,6 +120,15 @@ class ReviewPage extends React.Component {
       total += review.rating;
     });
     return (total / reviews.length).toFixed(1);
+  }
+
+  loadMoreReviews() {
+    if (this.state.reviewsLeft > 0) {
+      this.setState(prevState => ({
+        displayedReviews: prevState.displayedReviews.concat(prevState.reviews.slice(prevState.displayedReviews.length, prevState.displayedReviews.length + 5)),
+        reviewsLeft: prevState.reviews.length - prevState.displayedReviews.length
+      }));
+    }
   }
 
   componentDidMount() {
@@ -129,7 +149,9 @@ class ReviewPage extends React.Component {
         this.setState({
           reviews: data,
           averageReview: this.findAverageReview(data),
-          averageWouldRecommend: this.findAverageRecommend(data)
+          averageWouldRecommend: this.findAverageRecommend(data),
+          displayedReviews: data.slice(0, 5),
+          reviewsLeft: data.length - 5
         });
       }
     });
@@ -153,7 +175,7 @@ class ReviewPage extends React.Component {
           <StarAverage className="average" reviewsAverage={this.state.averageReview} totalReviews={this.state.reviews.length}/>
           <WouldRecommendAverage averageRecommend={this.state.averageWouldRecommend}/>
           <UserReview getReviews={this.getReviewData.bind(this)}/>
-          <Reviews reviews={this.state.reviews}/>
+          <Reviews reviews={this.state.displayedReviews}/>
         </Stylings>
       </Grid>
       </>

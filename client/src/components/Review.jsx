@@ -155,7 +155,7 @@ function Review(props) {
             <ReviewStyle>
               <div className="grid">
                 <div>
-                  <span className="circle" style={{backgroundColor: getRandomColor()}}>{review.user_name.substring(0, 1)}</span><span className="user">{review.user_name}</span><span className="date">{moment(review.review_date).format('ll')}</span>
+                  <span className="circle" style={{backgroundColor: getRandomColor()}}>{review.user_name ? review.user_name.substring(0, 1) : null}</span><span className="user">{review.user_name}</span><span className="date">{moment(review.review_date).format('ll')}</span>
                 </div>
                 <div className="stars">{'★ '.repeat(review.rating).concat('☆ '.repeat(5 - review.rating))}</div>
                 <div className="header">{review.header}</div>
