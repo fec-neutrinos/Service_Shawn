@@ -50,16 +50,17 @@ var seed = function() {
     table.string('review_text', 1000);
     table.integer('rating');
     table.boolean('would_recommend');
-  }).then(function() {
-    return knex('reviews')
-      .insert(fakeReviews)
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
+  })
+    .then(() => {
+      return knex('reviews')
+        .insert(fakeReviews)
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    });
 };
 
 module.exports = {
