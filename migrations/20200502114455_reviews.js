@@ -6,7 +6,7 @@ exports.up = function(knex) {
     table.integer('product_id').notNullable();
     table.date('review_date');
     table.string('header', 40);
-    table.string('review_text');
+    table.string('review_text', 1000);
     table.integer('rating');
     table.boolean('would_recommend');
   });

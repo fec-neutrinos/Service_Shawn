@@ -1,3 +1,3 @@
-const seed = require('./seedFunctions.js');
+const seed = require('./relationalSeeding.js');
 
 seed.seed();
