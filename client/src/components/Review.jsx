@@ -15,15 +15,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 var Layout = styled.div`
   .container {
     display: inline-grid;
@@ -155,9 +146,9 @@ function Review(props) {
             <ReviewStyle>
               <div className="grid">
                 <div>
-                  <span className="circle" style={{backgroundColor: getRandomColor()}}>{review.user_name ? review.user_name.substring(0, 1) : null}</span><span className="user">{review.user_name}</span><span className="date">{moment(review.review_date).format('ll')}</span>
+                  <span className="circle" style={{backgroundColor: review.thumbnail}}>{review.user_name ? review.user_name.substring(0, 1) : null}</span><span className="user">{review.user_name}</span><span className="date">{moment(review.review_date).format('ll')}</span>
                 </div>
-                <div className="stars">{'★ '.repeat(review.rating).concat('☆ '.repeat(5 - review.rating))}</div>
+                <div className="stars">{[...Array(review.rating)].map((e, i) => <StarIcon key={i}/>).concat([...Array(5 - review.rating)].map((e, i) => <StarBorderIcon key={i + 5}/>))}</div>
                 <div className="header">{review.header}</div>
                 <div className="text">{review.review_text}</div>
                 <div><span>{(review.would_recommend > 0) ? <CheckIcon className="check"></CheckIcon> : <ClearIcon className="check"></ClearIcon>}</span><span className="recommend">Would {review.would_recommend > 0 ? '' : 'not '}recommend to a friend.</span></div>
