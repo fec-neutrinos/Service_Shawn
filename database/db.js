@@ -16,26 +16,22 @@ const knex = require('knex')({
   }
 });
 
+
+// assumes user is already 'signed in'
+// uses hardcoded default user: ShawnChambers
 const addReview = function(review, cb) {
   knex.transaction((trx) => {
     return trx
-      .insert({user_name: review.user_name}).into('users')
+      .select().table('users').where('user_name', review.user_name)
       .then((user_id) => {
         delete review.user_name;
-        review.user_id = user_id[0];
+        review.user_id = user_id[0].user_id;
         return trx('reviews').insert(review);
       })
       .catch((err) => {
         console.error(err);
       });
   });
-  // knex('reviews').insert(review)
-  //   .then((review) => {
-  //     console.log(`inserted ${review} into reviews table`);
-  //   })
-  //   .error((err) => {
-  //     console.log(err);
-  //   });
 };
 
 // const addReview = function(review, cb) {
@@ -49,7 +45,9 @@ const addReview = function(review, cb) {
 // };
 
 const getReviews = function(productId, cb) {
-  knex.select().table('reviews').where('product_id', productId['product_id'].toString()).orderBy('review_id', 'desc')
+  knex.select().table('reviews').where('product_id', productId['product_id'].toString())
+    .leftJoin('users', {'reviews.user_id': 'users.user_id'})
+    .orderBy('review_id', 'desc')
     .then((data) => {
       cb(data);
     })
