@@ -2,9 +2,12 @@
 import $ from 'jquery';
 import styled from 'styled-components';
 import moment from 'moment';
+import StarRating from './StarRating';
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import Grid from '@material-ui/core/Grid';
+import StarIcon from '@material-ui/icons/Star';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const Post = styled.div`
   button {
@@ -84,38 +87,6 @@ const Question = styled.div`
   }
 `;
 
-const Rating = styled.div`
-  .title {
-    font-family: Stratos Web;
-    font-size: 22px;
-    line-height: 18px;
-    text-align: center;
-    padding-bottom: 10px;
-  }
-  .rating {
-    unicode-bidi: bidi-override;
-    font-size: 22px
-    direction: rtl;
-    position: absolute;
-    margin-left: 40px;
-  }
-  .rating > span {
-    display: inline-block;
-    position: relative;
-  }
-  .stars > span:hover:before,
-  .stars > span:hover ~ span:before {
-    content: '★';
-    position: absolute;
-  }
-  .message {
-    font-family: gordita;
-    font-size: 14px;
-    direction: ltr;
-    padding-left: 15px;
-  }
-`;
-
 const Text = styled.div`
   .header {
     height: 23px;
@@ -149,19 +120,35 @@ class UserReview extends React.Component {
       review_text: '',
       rating: '',
       would_recommend: '',
-      hasBeenReviewed: false
+      hasBeenReviewed: false,
+      hovered: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleReview = this.handleReview.bind(this);
     this.handleRating = this.handleRating.bind(this);
     this.wouldRecommend = this.wouldRecommend.bind(this);
     this.wouldNotRecommend = this.wouldNotRecommend.bind(this);
+    this.handleHover = this.handleHover.bind(this);
+    this.handleLeave = this.handleLeave.bind(this);
   }
 
   handleChange(event) {
     const {name, value} = event.target;
     this.setState({
       [name]: value
+    });
+  }
+
+  handleHover(e) {
+    const {className} = e.target;
+    this.setState({
+      hovered: className.baseVal.substring(20)
+    });
+  }
+
+  handleLeave(e) {
+    this.setState({
+      hovered: null
     });
   }
 
@@ -174,10 +161,18 @@ class UserReview extends React.Component {
   handleRating(event) {
     event.persist();
     event.preventDefault();
-    const {className} = event.target;
-    this.setState({
-      rating: className.substring(4)
-    });
+    const {parentNode} = event.target;
+    if (parentNode.className.baseVal) {
+      console.log('clicked', parentNode.className.baseVal.substring(20));
+      this.setState({
+        rating: parentNode.className.baseVal.substring(20)
+      });
+    } else {
+      console.log('clicked outside', event.target.className.baseVal.substring(20));
+      this.setState({
+        rating: event.target.className.baseVal.substring(20)
+      });
+    }
   }
 
   wouldNotRecommend() {
@@ -219,21 +214,9 @@ class UserReview extends React.Component {
         null
       );
     }
-    // use ternary statements to evaluate component state and render stars
     return (
       <>
-      <Rating>
-        <div className="title">YOUR REVIEW</div>
-        <div>
-          <div className="rating" onClick={this.handleRating}>
-            <span className="message">{this.state.rating > 3 ? 'Great, so glad you liked it!' : ''}{this.state.rating < 3 && this.state.rating !== '' ? 'We\'re sorry you had a bad experience!' : ''}</span>
-            <span className="stars">
-              <span className="star5">{this.state.rating >= 5 ? '★' : '☆'}</span><span className="star4">{this.state.rating >= 4 ? '★' : '☆'}</span><span className="star3">{this.state.rating >= 3 ? '★' : '☆'}</span><span className="star2">{this.state.rating >= 2 ? '★' : '☆'}</span><span className="star1">{this.state.rating >= 1 ? '★' : '☆'}</span>
-            </span>
-
-          </div>
-        </div>
-      </Rating>
+      <StarRating handleRating={this.handleRating} handleHover={this.handleHover} handleLeave={this.handleLeave} hovered={this.state.hovered} rating={this.state.rating}/>
       <Text>
         <div>
           <textarea className="header" name='header' type='text' placeholder='What was your overall impression? (Optional)' onChange={this.handleChange}/>

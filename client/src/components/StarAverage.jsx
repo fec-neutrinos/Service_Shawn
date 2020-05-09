@@ -29,7 +29,7 @@ function StarAverage(props) {
     padding: 0;
     width: ${((props.reviewsAverage / 5) * 100)}%;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     display: block;
     top: 0;
     left: 0;
@@ -47,6 +47,15 @@ function StarAverage(props) {
       line-height: 20px;
       padding: 6px;
     }
+  `;
+
+  var Buffer = styled.div`
+    padding: 0;
+    display: block;
+    height: 25px;
+    width: 25px;
+    background-color: white;
+    z-index: 1;
   `;
 
   return (
@@ -71,14 +80,15 @@ function StarAverage(props) {
   //       <div className="average">{props.reviewsAverage}</div>
   //     </Average>
   //     <Stars>
-  //       <JudgyStars>
-  //         <div><StarIcon></StarIcon><StarIcon></StarIcon><StarIcon></StarIcon><StarIcon></StarIcon><StarIcon></StarIcon></div>
-  //         {/* <div><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div> */}
-  //       </JudgyStars>
-  //       <BlankStars>
+  //       {/* <BlankStars>
   //         <div><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon><StarBorderIcon></StarBorderIcon></div>
-  //         {/* <div><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span><span className="total">{(props.totalReviews > 0) ? props.totalReviews : ''}</span></div> */}
-  //       </BlankStars>
+  //       </BlankStars> */}
+  //       <JudgyStars>
+  //         <div><StarIcon/><StarIcon/><StarIcon/><StarIcon/><StarIcon precision={0.5}/></div>
+  //       </JudgyStars>
+  //       <Buffer>
+  //         <div className='huh'></div><div></div><div></div><div></div><div></div>
+  //       </Buffer>
   //     </Stars>
   //   </div>
   // );
