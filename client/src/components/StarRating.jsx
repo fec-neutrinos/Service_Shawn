@@ -26,41 +26,15 @@ var StarRating = (props) => {
     <>
     <Rating>
       <div className='rating'>
-        <span onClick={props.handleRating} value={1}>
-          {props.hovered > 0 || props.rating > 0 ?
-            <StarIcon className='star1' value={1} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-            :
-            <StarBorderIcon className='star1' value={1} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-          }
-        </span>
-        <span onClick={props.handleRating} value={2}>
-          {props.hovered > 1 || props.rating > 1 ?
-            <StarIcon className='star2' value={2} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-            :
-            <StarBorderIcon className='star2' value={2} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-          }
-        </span>
-        <span onClick={props.handleRating} value={3}>
-          {props.hovered > 2 || props.rating > 2 ?
-            <StarIcon className='star3' value={3} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-            :
-            <StarBorderIcon className='star3'value={3} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-          }
-        </span>
-        <span onClick={props.handleRating} value={4}>
-          {props.hovered > 3 || props.rating > 3 ?
-            <StarIcon className='star4' value={4} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-            :
-            <StarBorderIcon className='star4' value={4} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-          }
-        </span>
-        <span onClick={props.handleRating} value={5}>
-          {props.hovered > 4 || props.rating > 4 ?
-            <StarIcon className='star5' value={5} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-            :
-            <StarBorderIcon className='star5'value={5} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
-          }
-        </span>
+        {[...Array(5)].map((e, i) => (
+          <span key={`star${i + 1}`} onClick={props.handleRating} value={i + 1}>
+            {props.hovered > i || props.rating > i ?
+              <StarIcon className={`star${i + 1}`} value={i + 1} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
+              :
+              <StarBorderIcon className={`star${i + 1}`}value={i + 1} onMouseEnter={props.handleHover} onMouseLeave={props.handleLeave}/>
+            }
+          </span>
+        ))}
         <span className="message">{props.rating > 3 ? 'Great, so glad you liked it!' : ''}{props.rating < 3 && props.rating !== '' ? 'We\'re sorry you had a bad experience!' : ''}</span>
       </div>
     </Rating>
@@ -69,3 +43,8 @@ var StarRating = (props) => {
 };
 
 export default StarRating;
+
+
+
+
+// {[...Array(review.rating)].map((e, i) => <StarIcon key={i}/>).concat([...Array(5 - review.rating)].map((e, i) => <StarBorderIcon key={i + 5}/>))}

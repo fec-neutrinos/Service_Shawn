@@ -163,12 +163,10 @@ class UserReview extends React.Component {
     event.preventDefault();
     const {parentNode} = event.target;
     if (parentNode.className.baseVal) {
-      console.log('clicked', parentNode.className.baseVal.substring(20));
       this.setState({
         rating: parentNode.className.baseVal.substring(20)
       });
     } else {
-      console.log('clicked outside', event.target.className.baseVal.substring(20));
       this.setState({
         rating: event.target.className.baseVal.substring(20)
       });
